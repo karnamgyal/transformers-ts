@@ -43,4 +43,5 @@ This project is structured as a general framework rather than a single experimen
 It is intended for reuse in research, prototyping, and applied ML pipelines.
 
 ### Status
-Doing literature review on paper and transformer architecture
+Doing literature review on paper and transformer architecture.
+Targeted completion: February 2026.
