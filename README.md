@@ -13,6 +13,7 @@ The framework:
 - Splits signals into fixed-length patches
 - Uses a Transformer encoder to model temporal structure
 - Trains using masked reconstruction instead of labels
+
 The learned representations are general and reusable.
 
 ### Learning Objective
@@ -36,12 +37,15 @@ The learned embeddings are used for:
 - Regression
 - Forecasting
 - Anomaly detection
+
 Embeddings can be frozen or fine-tuned depending on the task.
 
 ### Framework Use
 This project is structured as a general framework rather than a single experiment.
+
 It is intended for reuse in research, prototyping, and applied ML pipelines.
 
 ### Status
 Doing literature review on paper and transformer architecture.
+
 Targeted completion: February 2026.
