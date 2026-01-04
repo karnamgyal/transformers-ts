@@ -1,20 +1,25 @@
-# Configuration file with hyperparameters for pretraining
+seed: 41
+
+device: cuda  
+
 data:
-  n_samples: 2000 # Number of synthetic time-series samples
-  seq_len: 512 # Length of each time-series sample
-  n_channels: 3 # Number of channels in the time-series data
-  batch_size: 8 # Batch size for training
-  num_workers: 0 # Number of workers for data loading
+  n_samples: 2000
+  seq_len: 512
+  n_channels: 3
+  batch_size: 8
+  num_workers: 0
 
 model:
-  patch_len: 16 # Length of each patch
-  stride: 16 # Stride for patch extraction
-  d_model: 128 # Dimension of the model
-  n_heads: 4 # Number of attention heads
-  n_layers: 2 # Number of transformer layers
+  patch_len: 16
+  stride: 16
+  d_model: 128
+  n_heads: 4
+  n_layers: 2
 
 train:
-  lr: 0.0003 # Learning rate
-  epochs: 1 # Number of training epochs
-  device: cuda # Will specify 'cuda' if available, else 'cpu'
-  log_interval: 10 # Interval for logging training status
+  lr: 0.0003
+  epochs: 10
+  log_interval: 10
+
+ssl:
+  mask_ratio: 0.75

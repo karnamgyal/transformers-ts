@@ -1,5 +1,7 @@
 seed: 41
 
+device: cuda  
+
 data:
   n_samples: 2000
   n_channels: 3

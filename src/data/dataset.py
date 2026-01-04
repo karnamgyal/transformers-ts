@@ -2,6 +2,7 @@
 import math
 import torch
 from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import random_split
 
 
 class StructuredSyntheticDataset(Dataset):
@@ -92,9 +93,10 @@ def build_loader(cfg: dict):
     )
 
 
-def build_forecast_loader(cfg: dict):
+def build_forecast_loaders(cfg: dict):
     data = cfg["data"]
     fcfg = cfg["forecast"]
+
     ds = StructuredForecastDataset(
         n_samples=int(data.get("n_samples", 2000)),
         context_len=int(fcfg["context_len"]),
@@ -102,10 +104,30 @@ def build_forecast_loader(cfg: dict):
         n_channels=int(data["n_channels"]),
         seed=int(cfg.get("seed", 41)),
     )
-    return DataLoader(
+
+    n = len(ds)
+    n_train = int(0.8 * n)
+    n_val = n - n_train
+
+    train_ds, val_ds = random_split(
         ds,
+        [n_train, n_val],
+        generator=torch.Generator().manual_seed(cfg.get("seed", 41)),
+    )
+
+    train_loader = DataLoader(
+        train_ds,
         batch_size=int(data["batch_size"]),
         shuffle=True,
         drop_last=True,
         num_workers=int(data.get("num_workers", 0)),
     )
+
+    val_loader = DataLoader(
+        val_ds,
+        batch_size=int(data["batch_size"]),
+        shuffle=False,
+        num_workers=int(data.get("num_workers", 0)),
+    )
+
+    return train_loader, val_loader
