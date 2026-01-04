@@ -1,4 +1,6 @@
 # Self-supervised pretraining with masked patch reconstruction 
+import os
+os.makedirs("checkpoints", exist_ok=True)
 
 import torch
 import torch.nn as nn
@@ -110,6 +112,14 @@ def main(cfg: dict):
 
             step += 1
 
+    torch.save(
+    {
+        "model": model.state_dict(),
+        "decoder": decoder.state_dict(),
+        "cfg": cfg,
+    },
+    "checkpoints/pretrain.pt",
+    )
     print("pretraining done")
 
 if __name__ == "__main__":
